@@ -1,0 +1,60 @@
+.app {
+  text-align: center;
+  max-width: 350px;
+  margin: 40px auto;
+  padding: 15px;
+  background: #f4f4f4;
+  border-radius: 8px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+  color: #ff5733;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+input, button {
+  padding: 8px;
+  font-size: 15px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+button {
+  background: #ff5733;
+  color: white;
+  cursor: pointer;
+  border: none;
+}
+
+button:hover {
+  background: #e04e2f;
+}
+
+.birthday-list {
+  margin-top: 15px;
+}
+
+.birthday-item {
+  display: flex;
+  justify-content: space-between;
+  background: white;
+  padding: 8px;
+  margin: 5px 0;
+  border-radius: 5px;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.popup {
+  background: #ffcc00;
+  padding: 8px;
+  border-radius: 5px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
