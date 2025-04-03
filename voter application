@@ -1,0 +1,62 @@
+5)VOTER APPLICATION
+
+import React, { useState } from "react";
+import "./App.css";
+function App() {
+  const candidates = ["Alice", "Bob", "Charlie"];
+  const [votes, setVotes] = useState({ Alice: 0, Bob: 0, Charlie: 0 });
+  const handleVote = (candidate) => {
+    setVotes({ ...votes, [candidate]: votes[candidate] + 1 });
+  };
+  return (
+    <div className="voting-app">
+      <h2>Voting Application</h2>
+      <div className="candidates">
+        {candidates.map((candidate) => (
+          <div key={candidate} className="candidate">
+            <h3>{candidate}</h3>
+            <p>Votes: {votes[candidate]}</p>
+            <button onClick={() => handleVote(candidate)}>Vote</button>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+export default App;
+
+.voting-app {
+  width: 350px;
+  margin: 50px auto;
+  text-align: center;
+  padding: 20px;
+  background: #f4f4f4;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.candidates {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.candidate {
+  background: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #218838;
+}
