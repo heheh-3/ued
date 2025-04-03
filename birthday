@@ -1,0 +1,129 @@
+7)BIRTHDAY REMAINDER
+
+import React, { useState, useEffect } from "react";
+import "./App.css";
+const BirthdayReminder = () => {
+    const [birthdays, setBirthdays] = useState([
+        { id: 1, name: "John Doe", date: "2024-03-10" },
+        { id: 2, name: "Jane Smith", date: "2024-05-15" },
+    ]);
+    const [newName, setNewName] = useState("");
+    const [newDate, setNewDate] = useState("");
+    const [popup, setPopup] = useState(null);
+    const addBirthday = () => {
+        if (newName && newDate) {
+            setBirthdays([...birthdays, { id: Date.now(), name: newName, date: newDate }]);
+            setNewName("");
+            setNewDate("");
+        }
+    };
+    const removeBirthday = (id) => {
+        setBirthdays(birthdays.filter((bday) => bday.id !== id));
+    };
+    
+    useEffect(() => {
+        const today = new Date().toISOString().split("T")[0];
+        const upcomingBday = birthdays.find((bday) => bday.date === today);
+        if (upcomingBday) {
+            setPopup(`🎉 Happy Birthday ${upcomingBday.name}! 🎂`);
+            setTimeout(() => setPopup(null), 3000);
+        }
+    }, [birthdays]);
+    return (
+        <div className="app">
+            <h2>🎈 Birthday Reminder</h2>
+            {popup && <div className="popup">{popup}</div>}
+            <div className="input-container">
+                <input 
+                    type="text" 
+                    placeholder="Enter Name" 
+                    value={newName} 
+                    onChange={(e) => setNewName(e.target.value)} 
+                />
+                <input 
+                    type="date" 
+                    value={newDate} 
+                    onChange={(e) => setNewDate(e.target.value)} 
+                />
+                <button onClick={addBirthday}>Add Birthday</button>
+            </div>
+            <div className="birthday-list">
+                {birthdays.map((bday) => (
+                    <div key={bday.id} className="birthday-item">
+                        <span>{bday.name} - {bday.date}</span>
+                        <button onClick={() => removeBirthday(bday.id)}>Remove</button>
+                    </div>
+                ))}
+            </div>
+            
+        </div>
+    );
+};
+export default BirthdayReminder;
+
+.app {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 10px;
+    background: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #ff6600;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+input, button {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+button {
+    background-color: #ff6600;
+    color: white;
+    cursor: pointer;
+    border: none;
+}
+
+button:hover {
+    background-color: #e65c00;
+}
+
+.birthday-list {
+    margin-top: 20px;
+}
+
+.birthday-item {
+    display: flex;
+    justify-content: space-between;
+    background: white;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.popup {
+    background-color: #ffcc00;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.process-btn {
+    margin-top: 15px;
+    width: 100%;
+}
