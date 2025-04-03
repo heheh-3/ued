@@ -1,0 +1,92 @@
+4)CALCULATOR
+
+import React, { useState } from "react";
+import "./App.css";
+function App() {
+  const [input, setInput] = useState("");
+
+  const handleClick = (value) => {
+    setInput(input + value);
+  };
+
+  const clearInput = () => {
+    setInput("");
+  };
+
+  const calculateResult = () => {
+    try {
+      setInput(eval(input).toString()); 
+    } catch (error) {
+      setInput("Error");
+    }
+  };
+
+  return (
+    <div className="calculator">
+      <h2>React Calculator</h2>
+      <input type="text" value={input} readOnly />
+      <div className="buttons">
+        {["7", "8", "9", "/", "4", "5", "6", "*", "1", "2", "3", "-", "0", ".", "=", "+"].map(
+          (btn) =>
+            btn === "=" ? (
+              <button key={btn} onClick={calculateResult}>
+                {btn}
+              </button>
+            ) : (
+              <button key={btn} onClick={() => handleClick(btn)}>
+                {btn}
+              </button>
+            )
+        )}
+        <button className="clear" onClick={clearInput}>
+          C
+        </button>
+      </div>
+    </div>
+  );
+}
+export default App;
+
+.calculator {
+  width: 300px;
+  margin: 50px auto;
+  text-align: center;
+  padding: 20px;
+  background: #f4f4f4;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+input {
+  width: 90%;
+  padding: 10px;
+  font-size: 20px;
+  text-align: right;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+}
+
+button {
+  padding: 15px;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  background: #ddd;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #bbb;
+}
+
+.clear {
+  background: red;
+  color: white;
+  grid-column: span 4;
+}
